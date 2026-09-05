@@ -1,4 +1,4 @@
-import accountModel from '../model/accountModel.js'
+import accountModel from '../models/accountModel.js'
 
 export const createAccount = async (req, res) => {
     const user = req.user
