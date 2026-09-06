@@ -1,11 +1,11 @@
-import { authMiddleware } from "../middlewares/authMiddleware.js";
+import { authMiddleware, authSystemUserMiddleware } from "../middlewares/authMiddleware.js";
 import express from 'express'
-import { createTransaction } from "../controllers/transactionController.js";
+import { createInitialFundsTransaction, createTransaction } from "../controllers/transactionController.js";
 
 
 const router = express.Router()
 
 
 router.post('/', authMiddleware, createTransaction)
-
+router.post('/system/initial-funds', authSystemUserMiddleware, createInitialFundsTransaction)
 export default router

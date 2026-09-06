@@ -15,6 +15,12 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 6,
         select: false
+    },
+    systemUser: {
+        type: Boolean,
+        default: false,
+        immutable: true,
+        select: false
     }
 }, { timestamps: true })
 userSchema.pre('save', async function () {
