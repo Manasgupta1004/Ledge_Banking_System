@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from '../axios.js'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../context/context'
+
 const login = () => {
 
     const [login, setLogin] = useState(false)
@@ -10,8 +12,10 @@ const login = () => {
     const [password, setPassword] = React.useState("");
     const navigate = useNavigate()
 
+    const { setUser } = useAppContext()
+
     const formSubmitFunction = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         const url = login ? '/api/user/login' : '/api/user/register'
 
         try {
@@ -21,6 +25,7 @@ const login = () => {
             if (data.success) {
                 toast.success(data.message)
                 navigate('/')
+
             } else {
                 toast(data.message)
             }

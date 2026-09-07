@@ -16,7 +16,7 @@ export const registerUser = async (req, res) => {
 
         res.cookie('token', generatedToken)
 
-        return res.status(201).json({ success: true, message: 'User registered successfully' })
+        return res.status(201).json({ success: true, message: 'User registered successfully',  })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: 'Server Error' })
@@ -36,7 +36,7 @@ export const loginUser = async (req, res) => {
         }
         const generatedToken = jwt.sign({ id: alreadyUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: '30d' })
         res.cookie('token', generatedToken)
-        return res.status(200).json({ success: true, message: 'Login successful'})
+        return res.status(200).json({ success: true, message: 'Login successful',})
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: 'Server Error' })
@@ -47,9 +47,33 @@ export const logoutUser = async (req, res) => {
     const token = req.cookies.token || req.headers.authorization
 
     if (!token) {
-        return res.status(200).json({ message: 'user logged out successfully' })
+        return res.status(200).json({ success: true, message: 'user logged out successfully' })
     }
-    res.cookie('token', '')
+    res.cookie('token')
     await blackListModel.create({ token: token })
-    return res.status(200).json({ message: 'User Logout Successfully' })
+    return res.status(200).json({ success: true, message: 'User Logout Successfully' })
 }
+
+export const getCurrentUser = async (req, res) => {
+    try {
+        const user = await userModel.findById(req.user.id)
+
+        if (!user) {
+            return res.json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        res.json({
+            success: true,
+            user
+        });
+
+    } catch (error) {
+        res.json({
+            success: false,
+            message: error.message
+        });
+    }
+};
