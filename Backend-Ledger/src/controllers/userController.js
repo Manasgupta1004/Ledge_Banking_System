@@ -16,7 +16,7 @@ export const registerUser = async (req, res) => {
 
         res.cookie('token', generatedToken)
 
-        return res.status(201).json({ message: 'User registered successfully', user: newUser, token: generatedToken })
+        return res.status(201).json({ success: true, message: 'User registered successfully' })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: 'Server Error' })
@@ -36,7 +36,7 @@ export const loginUser = async (req, res) => {
         }
         const generatedToken = jwt.sign({ id: alreadyUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: '30d' })
         res.cookie('token', generatedToken)
-        return res.status(200).json({ message: 'Login successful', user: alreadyUser, token: generatedToken })
+        return res.status(200).json({ success: true, message: 'Login successful'})
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: 'Server Error' })
