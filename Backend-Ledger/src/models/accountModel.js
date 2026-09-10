@@ -20,6 +20,9 @@ const accountSchema = new mongoose.Schema({
         type: String,
         required: true,
         default: 'INR',
+    },
+    qrimage:{
+        type: String
     }
 
 }, { timestamps: true });

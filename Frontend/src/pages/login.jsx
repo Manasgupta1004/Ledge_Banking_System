@@ -12,8 +12,6 @@ const login = () => {
     const [password, setPassword] = React.useState("");
     const navigate = useNavigate()
 
-    const { setUser } = useAppContext()
-
     const formSubmitFunction = async (e) => {
         e.preventDefault()
         const url = login ? '/api/user/login' : '/api/user/register'
@@ -30,7 +28,7 @@ const login = () => {
                 toast(data.message)
             }
         } catch (error) {
-            toast.error(error.response?.data?.message || error.message)
+            toast(error.response?.data?.message || error.message)
         }
     }
 

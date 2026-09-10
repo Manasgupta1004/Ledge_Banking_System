@@ -9,14 +9,16 @@ import Account from './pages/accounts'
 import QR from './pages/QR'
 import Scanner from './pages/scanner'
 import Navbar from './components/navbar'
+import Sidebar from './components/sidebar'
 const App = () => {
   return (
-
     <div className='flex w-full'>
       <Toaster />
-      <Home />
-      < Navbar />
-      <Routes>
+      <Sidebar />
+      <div className='w-full'>
+        <Navbar/>
+        <Routes>
+        <Route path='/' element={<Home/>}/>
         <Route path='/signup' element={<Login />} />
         <Route path='/my-accounts' element={<Account />} />
         <Route path='/my-qr' element={<QR />} />
@@ -24,8 +26,10 @@ const App = () => {
         <Route path='/my-history' element={<History />} />
         <Route path='/my-balance' element={<Balance />} />
       </Routes>
+      </div>
     </div>
   )
 }
 
 export default App
+
