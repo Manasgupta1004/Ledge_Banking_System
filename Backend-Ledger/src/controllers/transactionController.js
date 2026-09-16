@@ -92,20 +92,23 @@ export const createTransaction = async (req, res) => {
             //     return new Promise((resolve) => setTimeout(resolve, 10 * 1000))
             // })
 
-            const creditLedgerEntry = await ledgerModel.create([{
+            const crediteLedgerEntry = await ledgerModel.create([{
                 account: toAccount,
                 amount: amount,
                 transaction: transaction._id,
                 type: 'credit'
             }], { session })
 
-            await transactionModel.findOneAndUpdate(
+            const transaction = await transactionModel.findOneAndUpdate(
                 { _id: transaction._id },
                 { status: 'completed' },
                 { session }
             )
             await session.commitTransaction()
             session.endSession()
+
+            return res.json({success: true, crediteLedgerEntry, debiteLedgerEntry, transaction})
+
         } catch (error) {
             return res.status(400).json({ message: 'Transaction is pending due to some issue, please retry after some time' })
         }

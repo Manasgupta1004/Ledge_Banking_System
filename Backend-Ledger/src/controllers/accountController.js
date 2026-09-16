@@ -60,13 +60,17 @@ export const generateQR = async (req, res) => {
         })
         console.log(qrData)
         const qrCode = await QRCode.toDataURL(qrData)
-        const QRmodel = await QRModel.create({
+        const alreadyQR = await QRModel.findOne({ accountId: accountId })
+        if (alreadyQR) {
+            return res.status(200).json({ success: true, QRmodel: alreadyQR })
+        }
+        const qrModel = await QRModel.create({
             accountId: accountId,
             qrImageURL: qrCode
         })
-        
-        return res.status(201).json({success: true, QRmodel})
-        
+
+        return res.status(201).json({ success: true, QRmodel: qrModel})
+
     } catch (error) {
         return res.json({ success: false, message: error.message })
     }

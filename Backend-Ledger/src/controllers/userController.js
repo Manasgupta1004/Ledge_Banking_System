@@ -2,6 +2,7 @@ import userModel from '../models/userModel.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import blackListModel from '../models/blackListModel.js'
+import accountModel from '../models/accountModel.js'
 
 export const registerUser = async (req, res) => {
     const { name, email, password } = req.body
@@ -16,7 +17,7 @@ export const registerUser = async (req, res) => {
 
         res.cookie('token', generatedToken)
 
-        return res.status(201).json({ success: true, message: 'User registered successfully',  })
+        return res.status(201).json({ success: true, message: 'User registered successfully', })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: 'Server Error' })
@@ -36,7 +37,7 @@ export const loginUser = async (req, res) => {
         }
         const generatedToken = jwt.sign({ id: alreadyUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: '30d' })
         res.cookie('token', generatedToken)
-        return res.status(200).json({ success: true, message: 'Login successful',})
+        return res.status(200).json({ success: true, message: 'Login successful', })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: 'Server Error' })
@@ -77,3 +78,17 @@ export const getCurrentUser = async (req, res) => {
         });
     }
 };
+
+export const getUserById = async (req, res) => {
+    try {
+        const { accountId } = req.param
+
+        const account = accountModel.findOne({ _id: accountId })
+        const userId = account.user
+        const user = userModel.fineOne({ _id: userId })
+        return res.status(200).json({ success: true, user })
+
+    } catch (error) {
+        return res.json(error.mssage)
+    }
+}
