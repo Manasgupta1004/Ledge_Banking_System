@@ -2,6 +2,7 @@ import { get } from 'mongoose'
 import accountModel from '../models/accountModel.js'
 import QRCode from 'qrcode'
 import QRModel from '../models/QRCodeModel.js'
+import userModel from '../models/userModel.js'
 
 export const createAccount = async (req, res) => {
     try {
@@ -69,8 +70,20 @@ export const generateQR = async (req, res) => {
             qrImageURL: qrCode
         })
 
-        return res.status(201).json({ success: true, QRmodel: qrModel})
+        return res.status(201).json({ success: true, QRmodel: qrModel })
 
+    } catch (error) {
+        return res.json({ success: false, message: error.message })
+    }
+}
+
+export const getUserById = async (req, res) => {
+    try {
+        const { accountId } = req.params
+        const findAccount = await accountModel.find({ _id: accountId })
+        const findUser = await userModel.find({ _id: findAccount.user })
+        const userName = findUser.name
+        return res.json({ success: true, userName })
     } catch (error) {
         return res.json({ success: false, message: error.message })
     }

@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { Scan, Plus, WalletCards, Landmark, DeleteIcon, Delete, LucideDelete, Trash2 } from 'lucide-react'
+import { Plus, WalletCards, Landmark, Trash2 } from 'lucide-react'
 import NoAccount from '../components/noaccountscreen'
 import { useAppContext } from '../context/context'
 import axios from '../axios.js'
 import { toast } from 'react-hot-toast'
 
 const accounts = () => {
-  const [deleteAccountId, setDeleteAccountId] = useState(null)
 
   const { userAccounts, haveAAccounts, user } = useAppContext()
 

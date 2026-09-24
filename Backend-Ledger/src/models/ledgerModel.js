@@ -31,6 +31,8 @@ const ledgerSchema = new mongoose.Schema({
         required: [true, 'Transaction type is required'],
         immutable: true
     }
+}, {
+    timestamps: true
 })
 
 function preventLedgerModification() {

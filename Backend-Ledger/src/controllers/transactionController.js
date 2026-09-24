@@ -10,6 +10,7 @@ export const createTransaction = async (req, res) => {
     const { fromAccount, toAccount, amount, idempotencyKey } = req.body
     try {
         if (!fromAccount || !toAccount || !amount || !idempotencyKey) {
+            console.log('missing')
             return res.status(400).json({
                 message: 'fromAccount, toAccount, amout ot idempotencyKey are required'
             })
@@ -107,7 +108,7 @@ export const createTransaction = async (req, res) => {
             await session.commitTransaction()
             session.endSession()
 
-            return res.json({success: true, crediteLedgerEntry, debiteLedgerEntry, transaction})
+            // return res.json({success: true, crediteLedgerEntry, debiteLedgerEntry, transaction})
 
         } catch (error) {
             return res.status(400).json({ message: 'Transaction is pending due to some issue, please retry after some time' })
@@ -115,7 +116,8 @@ export const createTransaction = async (req, res) => {
 
         res.status(201).json({
             message: 'Transaction completed successfully',
-            transaction: transaction
+            transaction: transaction,
+            success: true, crediteLedgerEntry, debiteLedgerEntry,
         })
 
     } catch (error) {
@@ -183,5 +185,26 @@ export const createInitialFundsTransaction = async (req, res) => {
     } catch (error) {
         console.log(error)
         return res.json({ message: error.message })
+    }
+}
+
+export const ledgerData = async (req, res) => {
+    try {
+        const { accountId } = req.params
+
+        const ledger = await ledgerModel.find({ account: accountId })
+        console.log("LEDGER:", ledger)
+        console.log("CREATED AT:", ledger.createdAt)
+
+        return res.json({
+            success: true,
+            ledger
+        })
+
+    } catch (error) {
+        return res.json({
+            success: false,
+            message: error.message
+        })
     }
 }

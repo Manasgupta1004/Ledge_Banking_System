@@ -60,7 +60,6 @@ export const AppContextProvider = ({ children }) => {
                     } else {
                         setHaveAAccounts(true);
                     }
-                    console.log('Accounts:', data.account)
                 }
             }
 
