@@ -1,5 +1,5 @@
 import React from 'react'
-import { Clock8Icon, Home, LogOutIcon, QrCodeIcon, ScanIcon, User, Wallet, WalletCards } from 'lucide-react'
+import { Clock8Icon, Home, LogOutIcon, PlusIcon, QrCodeIcon, ScanIcon, SendIcon, User, Wallet, WalletCards } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from '../axios.js'
 import toast from 'react-hot-toast'
@@ -28,7 +28,7 @@ const sidebar = () => {
         }
     }
     return (
-        <div className='flex flex-col items-center justify-between h-screen bg-gray-100 py-5'>
+        <div className='flex flex-col fixed items-center justify-between h-screen bg-gray-100 py-5'>
             <div className='flex flex-col'>
                 <div className='flex items-center justify-center mt-4'>
                     <h1 className='font-semibold text-xl'>Ledger</h1><p className='text-blue-500 text-2xl font-semibold'>X</p>
@@ -37,6 +37,14 @@ const sidebar = () => {
                     <div className={`${location.pathname === '/' ? 'bg-indigo-100 rounded w-[240px] cursor-pointer text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
                         <Home size={20} />
                         <p onClick={() => navigation('/')}>Home</p>
+                    </div>
+                     <div className={`${location.pathname === '/add-deposite' ? 'bg-indigo-100 w-[240px] cursor-pointer rounded text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
+                        <PlusIcon size={20} />
+                        <p onClick={() => navigation('/add-deposite')}>Add Deposite</p>
+                    </div>
+                     <div className={`${location.pathname === '/transaction' ? 'bg-indigo-100 w-[240px] cursor-pointer rounded text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
+                        <SendIcon size={20} />
+                        <p onClick={() => navigation('/transaction')}>Send Money</p>
                     </div>
                     <div className={`${location.pathname === '/my-accounts' ? 'bg-indigo-100 w-[240px] rounded cursor-pointer text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
                         <WalletCards size={20} />

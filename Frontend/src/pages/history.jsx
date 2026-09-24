@@ -6,31 +6,42 @@ import axios from '../axios.js'
 const history = () => {
   const { userAccounts, user } = useAppContext()
   const [ledgers, setLedgers] = useState({})
-  const [name, setName] = useState()
+  const [names, setNames] = useState({})
 
   const getUserById = async (accountId) => {
     try {
       const { data } = await axios.post(`/api/account/getuserbyid/${accountId}`)
       if (data.success) {
-        setName(data.userName)
+        setNames(prev => ({
+          ...prev,
+          [accountId]: data.userName
+        }))
       }
     } catch (error) {
       console.log(error)
     }
   }
 
-
   const getHistory = async (accountId) => {
     try {
       const { data } = await axios.get(`/api/transactions/get-ledger/${accountId}`)
 
-      console.log(data)
-
       if (data.success) {
+
         setLedgers(prev => ({
           ...prev,
           [accountId]: data.ledger
         }))
+
+        data.ledger.forEach(ledger => {
+
+          const otherAccountId =
+            ledger.type === 'credit'
+              ? ledger.transaction.fromAccount
+              : ledger.transaction.toAccount
+
+          getUserById(otherAccountId)
+        })
       }
 
     } catch (error) {
@@ -115,7 +126,15 @@ const history = () => {
                                 <p className='font-semibold capitalize'>
                                   {ledger.type}
                                 </p>
-                                <p>{ledger.type === 'credit' ? 'From' : 'To'}</p>
+                                <p>
+                                  {ledger.type === 'credit' ? 'From' : 'To'}: {
+                                    names[
+                                    ledger.type === 'credit'
+                                      ? ledger.transaction.fromAccount
+                                      : ledger.transaction.toAccount
+                                    ]
+                                  }
+                                </p>
                               </div>
                             </div>
                             <p className='text-sm text-gray-500'>

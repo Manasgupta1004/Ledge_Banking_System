@@ -43,7 +43,7 @@ const accounts = () => {
             <WalletCards className='h-15 w-15 p-2 text-blue-400 bg-blue-100 rounded-2xl' />
             <div>
               <h1 className='text-2xl font-semibold'> Accounts</h1>
-              <p>Manage Your Bank accounst, card and more</p>
+              <p>Manage Your Bank accounts, card and more</p>
             </div>
           </div>
           <div onClick={() => createAccount()} className='flex items-center px-4 py-2 rounded bg-blue-500 text-white gap-2'>

@@ -80,11 +80,34 @@ export const generateQR = async (req, res) => {
 export const getUserById = async (req, res) => {
     try {
         const { accountId } = req.params
-        const findAccount = await accountModel.find({ _id: accountId })
-        const findUser = await userModel.find({ _id: findAccount.user })
-        const userName = findUser.name
-        return res.json({ success: true, userName })
+
+        const findAccount = await accountModel.findOne({ _id: accountId })
+
+        if (!findAccount) {
+            return res.json({
+                success: false,
+                message: 'Account not found'
+            })
+        }
+
+        const findUser = await userModel.findOne({ _id: findAccount.user })
+
+        if (!findUser) {
+            return res.json({
+                success: false,
+                message: 'User not found'
+            })
+        }
+
+        return res.json({
+            success: true,
+            userName: findUser.name
+        })
+
     } catch (error) {
-        return res.json({ success: false, message: error.message })
+        return res.json({
+            success: false,
+            message: error.message
+        })
     }
 }

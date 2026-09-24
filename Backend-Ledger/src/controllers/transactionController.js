@@ -15,13 +15,15 @@ export const createTransaction = async (req, res) => {
                 message: 'fromAccount, toAccount, amout ot idempotencyKey are required'
             })
         }
-
-        const fromUserAccount = await accountModel.findOne({ _id: fromAccount })
+        const user = req.user
+        const fromUserAccount = await accountModel.findOne({ _id: fromAccount, user: user })
         const toUserAccount = await accountModel.findOne({ _id: toAccount })
 
         if (!fromUserAccount || !toUserAccount) {
             return res.status(400).json({ message: 'invalid fromAccount or toAccount' })
         }
+
+
 
         // 2. validate idempotency key
 
@@ -66,7 +68,7 @@ export const createTransaction = async (req, res) => {
         const balance = await fromUserAccount.getBalance()
         if (balance < amount) {
             return res.status(400).json({
-                message: `insufficient balancein fromAccount. current balance is ${balance}. request amount is ${amount}`
+                message: `insufficient balance in fromAccount. current balance is ${balance}. request amount is ${amount}`
             })
         }
 
@@ -192,9 +194,9 @@ export const ledgerData = async (req, res) => {
     try {
         const { accountId } = req.params
 
-        const ledger = await ledgerModel.find({ account: accountId })
-        console.log("LEDGER:", ledger)
-        console.log("CREATED AT:", ledger.createdAt)
+        const ledger = await ledgerModel
+            .find({ account: accountId })
+            .populate('transaction')
 
         return res.json({
             success: true,
