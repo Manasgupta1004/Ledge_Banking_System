@@ -1,4 +1,4 @@
-import { IndianRupee, SendHorizonalIcon, SendIcon } from 'lucide-react'
+import { IndianRupee, LoaderCircle, SendHorizonalIcon, SendIcon } from 'lucide-react'
 import React, { useState } from 'react'
 import { useAppContext } from '../context/context'
 import axios from '../axios.js'
@@ -9,15 +9,24 @@ const trandsaction = () => {
   const [fromAccount, setFromAccount] = useState('')
   const [toAccount, setToAccount] = useState('')
   const [amount, setAmount] = useState()
+  const [sending, setsending] = useState(false)
+  const [sent, setSent] = useState(false)
 
 
   const createTransaction = async () => {
     try {
+      setsending(true)
       const idempotencyKey = crypto.randomUUID()
       const { data } = await axios.post('/api/transactions/create-transaction', {
         fromAccount, toAccount, amount, idempotencyKey
       })
+      setsending(false)
+      if (data.success) {
+        setSent(true)
+      }
+
     } catch (error) {
+      setsending(false)
       toast.error(error.response?.data?.message || error.message)
     }
   }
@@ -65,8 +74,30 @@ const trandsaction = () => {
                 </div>
               </div>
               <button type='submit' className='flex items-center mt-8 bg-blue-500 gap-2 w-full text-white py-2 px-4 justify-center'>
-                <SendHorizonalIcon size={20} />
-                <p>Send Money</p>
+                {
+                  sent ?
+                    (
+                        <div className='flex items-center gap-2'>
+                          <div className='w-6 h-6 rounded-full text-white flex items-center justify-center'>
+                            ✓
+                          </div>
+                          <p>Sent Successfully</p>
+                        </div>
+                    ) :
+                    sending ? (
+                      <>
+                        <LoaderCircle className='animate-spin' size={20} />
+                        <p>Sending...</p>
+                      </>
+                    ) : (
+                      <>
+                        <SendHorizonalIcon size={20} />
+                        <p>Send Money</p>
+                      </>
+                    )
+
+
+                }
               </button>
             </div>
             <div className=''>

@@ -16,12 +16,22 @@ export const createTransaction = async (req, res) => {
             })
         }
         const user = req.user
+        if (
+            !mongoose.Types.ObjectId.isValid(fromAccount) ||
+            !mongoose.Types.ObjectId.isValid(toAccount)
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid account ID'
+            })
+        }
         const fromUserAccount = await accountModel.findOne({ _id: fromAccount, user: user })
         const toUserAccount = await accountModel.findOne({ _id: toAccount })
 
         if (!fromUserAccount || !toUserAccount) {
             return res.status(400).json({ message: 'invalid fromAccount or toAccount' })
         }
+
 
 
 
