@@ -1,12 +1,12 @@
 import React from 'react'
-import { Clock8Icon, Home, LogOutIcon, PlusIcon, QrCodeIcon, ScanIcon, SendIcon, User, Wallet, WalletCards } from 'lucide-react'
+import { Clock8Icon, Home, LogOutIcon, PlusIcon, QrCodeIcon, ScanIcon, SendIcon, User, Wallet, WalletCards, X } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from '../axios.js'
 import toast from 'react-hot-toast'
 import { useAppContext } from '../context/context.jsx'
 
 
-const sidebar = () => {
+const sidebar = ({showSidebar, setShowSidebar}) => {
     const location = useLocation()
     const navigation = useNavigate()
 
@@ -29,6 +29,9 @@ const sidebar = () => {
     }
     return (
         <div className='flex flex-col fixed items-center justify-between h-screen bg-gray-100 py-5'>
+            <div className='md:hidden lg:hidden absolute top-5 right-5'>
+                <X size={20} onClick={() => setShowSidebar(false)}/>
+            </div>
             <div className='flex flex-col'>
                 <div className='flex items-center justify-center mt-4'>
                     <h1 className='font-semibold text-xl'>Ledger</h1><p className='text-blue-500 text-2xl font-semibold'>X</p>
