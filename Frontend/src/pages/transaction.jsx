@@ -5,7 +5,7 @@ import axios from '../axios.js'
 import toast from 'react-hot-toast'
 
 const trandsaction = () => {
-  const { userAccounts, user } = useAppContext()
+  const { userAccounts } = useAppContext()
   const [fromAccount, setFromAccount] = useState('')
   const [toAccount, setToAccount] = useState('')
   const [amount, setAmount] = useState()
@@ -16,6 +16,7 @@ const trandsaction = () => {
   const createTransaction = async () => {
     try {
       setsending(true)
+      setSent(false)
       const idempotencyKey = crypto.randomUUID()
       const { data } = await axios.post('/api/transactions/create-transaction', {
         fromAccount, toAccount, amount, idempotencyKey
@@ -95,8 +96,6 @@ const trandsaction = () => {
                         <p>Send Money</p>
                       </>
                     )
-
-
                 }
               </button>
             </div>

@@ -9,3 +9,16 @@
 button{
   cursor: pointer;
 }
+
+/* #reader {
+    width: 100% !important;
+} */
+
+#reader > div {
+    margin: 0 auto !important;
+}
+
+#reader img {
+    margin: 0 auto !important;
+    display: block !important;
+}

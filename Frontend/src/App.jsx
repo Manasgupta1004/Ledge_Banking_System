@@ -14,12 +14,12 @@ import Transaction from './pages/transaction'
 import Deposite from './pages/deposite'
 const App = () => {
   return (
-    <div className='flex w-full'>
+    <div className='flex w-full h-screen'>
       <Toaster />
       <Sidebar />
-      <div className='w-full md:ml-60'>
+      <div className='w-full h-screen md:ml-60 flex flex-col'>
         <Navbar/>
-        <main className=''>
+        <main className='flex-1 min-h-0'>
         <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/signup' element={<Login />} />
