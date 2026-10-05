@@ -4,16 +4,19 @@ import NoAccount from '../components/noaccountscreen'
 import { useAppContext } from '../context/context'
 import axios from '../axios.js'
 import { toast } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const accounts = () => {
 
   const { userAccounts, haveAAccounts, user } = useAppContext()
+  const navigate = useNavigate()
 
   const createAccount = async () => {
     try {
       await axios.post('/api/account/create-account')
       toast('Account Created')
     } catch (error) {
+      navigate('/signup')
       console.log(error.message)
     }
   }
