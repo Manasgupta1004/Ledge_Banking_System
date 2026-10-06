@@ -21,9 +21,11 @@ const sidebar = ({showSidebar, setShowSidebar}) => {
                 navigation('/signup')
 
             } else {
+                navigation('/signup')
                 toast(data.message)
             }
         } catch (error) {
+            navigation('/signup')
             toast.error(data.message)
         }
     }
@@ -39,42 +41,42 @@ const sidebar = ({showSidebar, setShowSidebar}) => {
                 <div className='flex flex-col items-start w-full gap-2 mt-10'>
                     <div className={`${location.pathname === '/' ? 'bg-indigo-100 rounded w-[240px] cursor-pointer text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
                         <Home size={20} />
-                        <p onClick={() => navigation('/')}>Home</p>
+                        <p onClick={() =>{ navigation('/'); setShowSidebar(false)}}>Home</p>
                     </div>
                      <div className={`${location.pathname === '/add-deposite' ? 'bg-indigo-100 w-[240px] cursor-pointer rounded text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
                         <PlusIcon size={20} />
-                        <p onClick={() => navigation('/add-deposite')}>Add Deposite</p>
+                        <p onClick={() => { navigation('/add-deposite'); setShowSidebar(false) }}>Add Deposite</p>
                     </div>
                      <div className={`${location.pathname === '/transaction' ? 'bg-indigo-100 w-[240px] cursor-pointer rounded text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
                         <SendIcon size={20} />
-                        <p onClick={() => navigation('/transaction')}>Send Money</p>
+                        <p onClick={() => { navigation('/transaction'); setShowSidebar(false) }}>Send Money</p>
                     </div>
                     <div className={`${location.pathname === '/my-accounts' ? 'bg-indigo-100 w-[240px] rounded cursor-pointer text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
                         <WalletCards size={20} />
-                        <p onClick={() => navigation('/my-accounts')}>My Account</p>
+                        <p onClick={() => { navigation('/my-accounts'); setShowSidebar(false) }}>My Account</p>
                     </div>
                     <div className={`${location.pathname === '/my-scanner' ? 'bg-indigo-100 w-[240px] rounded cursor-pointer text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
                         <ScanIcon size={20} />
-                        <p onClick={() => navigation('/my-scanner')}>Scanner</p>
+                        <p onClick={() => { navigation('/my-scanner'); setShowSidebar(false) }}>Scanner</p>
                     </div>
                     <div className={`${location.pathname === '/my-qr' ? 'bg-indigo-100 w-[240px] cursor-pointer rounded text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
                         <QrCodeIcon size={20} />
-                        <p onClick={() => navigation('/my-qr')}>My QR</p>
+                        <p onClick={() => { navigation('/my-qr'); setShowSidebar(false) }}>My QR</p>
                     </div>
                     <div className={`${location.pathname === '/my-balance' ? 'bg-indigo-100 w-[240px] cursor-pointer rounded text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
                         <Wallet size={20} />
-                        <p onClick={() => navigation('/my-balance')}>Check Balance</p>
+                        <p onClick={() => { navigation('/my-balance'); setShowSidebar(false) }}>Check Balance</p>
                     </div>
                     <div className={`${location.pathname === '/my-history' ? 'bg-indigo-100 w-[240px] cursor-pointer rounded text-blue-500' : ''} py-2 px-5 flex items-center gap-2`}>
                         <Clock8Icon size={20} />
-                        <p onClick={() => navigation('/my-history')}>History</p>
+                        <p onClick={() => { navigation('/my-history'); setShowSidebar(false) }}>History</p>
                     </div>
                 </div>
             </div>
             <div className='flex items-center gap-2  hover:bg-indigo-100 w-[240px] cursor-pointer rounded hover:text-blue-500 py-2 px-5'>
                 <User className='p-1 h-6 w-6 rounded-full bg-blue-300' />
                 <p className=''>Logout</p>
-                <LogOutIcon onClick={() => logoutFunction()} className='ml-20' size={20} />
+                <LogOutIcon onClick={() => { logoutFunction(); setShowSidebar(false); navigation('/signup'); }} className='ml-20' size={20} />
             </div>
         </div>
     )

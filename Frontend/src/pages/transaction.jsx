@@ -53,7 +53,7 @@ const trandsaction = () => {
       </div>
       <div className='mt-5 p-5 bg-gray-50 rounded'>
         <form action="" onSubmit={handleSubmit}>
-          <div className='flex gap-8 p-4'>
+          <div className='md:flex lg:flex gap-8 p-4'>
             <div className='flex flex-col'>
               <h1 className='text-xl font-semibold'>From Account</h1>
               <p className='text-sm text-gray-600'>Select the account you want to send money from</p>
@@ -74,7 +74,21 @@ const trandsaction = () => {
                   <input value={toAccount} onChange={(e) => setToAccount(e.target.value)} placeholder='Enter To Account Number' required className='w-full border-none outline-none' type="text" />
                 </div>
               </div>
-              <button type='submit' className='flex items-center mt-8 bg-blue-500 gap-2 w-full text-white py-2 px-4 justify-center'>
+              
+            </div>
+            <div className='mt-6'>
+              <h1 className='text-xl font-semibold'>Amount</h1>
+              <p className='text-sm text-gray-600'>Enter the amount you want to transfer</p>
+              <div className='flex items-center gap-2 w-80 rounded bg-gray-200 mt-4 border border-gray-300' >
+                <div className='px-2 py-2 border-r border-gray-400'>
+                  <IndianRupee size={20} />
+                </div>
+                <input value={amount} onChange={(e) => setAmount(e.target.value)} type="number" required className='py-2 px-2 border-none outline-none' placeholder='EnterAmount' />
+              </div>
+            </div>
+          </div>
+          <div className='p-4'>
+          <button type='submit' className='flex w-80 items-center  bg-blue-500 gap-2 text-white py-2 px-4 justify-center'>
                 {
                   sent ?
                     (
@@ -98,18 +112,7 @@ const trandsaction = () => {
                     )
                 }
               </button>
-            </div>
-            <div className=''>
-              <h1 className='text-xl font-semibold'>Amount</h1>
-              <p className='text-sm text-gray-600'>Enter the amount you want to transfer</p>
-              <div className='flex items-center gap-2 rounded bg-gray-200 mt-4 border border-gray-300' >
-                <div className='px-2 py-2 border-r border-gray-400'>
-                  <IndianRupee size={20} />
-                </div>
-                <input value={amount} onChange={(e) => setAmount(e.target.value)} type="number" required className='py-2 px-2 border-none outline-none' placeholder='EnterAmount' />
               </div>
-            </div>
-          </div>
         </form>
       </div>
     </div>

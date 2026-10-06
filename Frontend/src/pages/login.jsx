@@ -57,7 +57,7 @@ const login = () => {
                     <input value={password} onChange={(e) => setPassword(e.target.value)} className="w-full outline-none bg-transparent py-2.5" type="password" placeholder="Password" required />
                 </div>
                 <button type='submit' className="w-full mb-3 bg-indigo-500 hover:bg-indigo-600 transition-all active:scale-95 py-2.5 rounded text-white font-medium">{login ? 'Login Account' : 'Create Account'}</button>
-                <p className="text-center mt-4">{login ? 'Do not have an account?' : 'Already have an account?'}<a href={login ? '#login' : ''} onClick={() => setLogin(!login)} className="text-blue-500 underline">{login ? 'Sign Up' : 'Login'}</a></p>
+                <p className="text-center mt-4">{login ? 'Do not have an account?' : 'Already have an account?'}<a href={login ? '#login' : ''} onClick={(e) => { e.preventDefault(); setLogin(!login); }} className="text-blue-500 underline">{login ? 'Sign Up' : 'Login'}</a></p>
             </form >
         </div >
     )
