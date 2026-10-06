@@ -12,7 +12,7 @@ const quickAction = () => {
             icon: Plus,
             color: 'text-green-400',
             bgColor: 'bg-green-100',
-            path: '/add-deposit'
+            path: '/add-deposite'
         },
         {
             title: 'Accounts',

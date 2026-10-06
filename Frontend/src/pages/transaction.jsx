@@ -53,7 +53,7 @@ const trandsaction = () => {
       </div>
       <div className='mt-5 p-5 bg-gray-50 rounded'>
         <form action="" onSubmit={handleSubmit}>
-          <div className='md:flex lg:flex gap-8 p-4'>
+          <div className='md:flex lg:flex gap-8 p-2'>
             <div className='flex flex-col'>
               <h1 className='text-xl font-semibold'>From Account</h1>
               <p className='text-sm text-gray-600'>Select the account you want to send money from</p>
@@ -76,7 +76,7 @@ const trandsaction = () => {
               </div>
               
             </div>
-            <div className='mt-6'>
+            <div className='mt-4 md:mt-0 lg:mt-0 flex flex-col'>
               <h1 className='text-xl font-semibold'>Amount</h1>
               <p className='text-sm text-gray-600'>Enter the amount you want to transfer</p>
               <div className='flex items-center gap-2 w-80 rounded bg-gray-200 mt-4 border border-gray-300' >
@@ -87,7 +87,7 @@ const trandsaction = () => {
               </div>
             </div>
           </div>
-          <div className='p-4'>
+          <div className='p-2 mt-2'>
           <button type='submit' className='flex w-80 items-center  bg-blue-500 gap-2 text-white py-2 px-4 justify-center'>
                 {
                   sent ?
