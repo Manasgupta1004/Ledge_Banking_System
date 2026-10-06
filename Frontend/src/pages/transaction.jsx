@@ -24,7 +24,7 @@ const trandsaction = () => {
       setsending(false)
       if (data.success) {
         setSent(true)
-      }
+      }                 
 
     } catch (error) {
       setsending(false)
