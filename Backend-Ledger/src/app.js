@@ -12,7 +12,7 @@ app.use(cookieparser())
 
 const allowedOrigins = [
     'http://localhost:5173',
-    'https://ledgerx-pay.vercel.app',,
+    'https://ledgerx-pay.vercel.app',
     'https://ledge-banking-system.vercel.app'
 ]
 
