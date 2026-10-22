@@ -9,8 +9,14 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieparser())
+
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://ledgerx-pay.vercel.app'
+]
+
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: allowedOrigins,
     credentials: true
 }))
 
