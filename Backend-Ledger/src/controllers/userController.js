@@ -15,7 +15,13 @@ export const registerUser = async (req, res) => {
 
         const generatedToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: '30d' })
 
-        res.cookie('token', generatedToken)
+        res.cookie('token', generatedToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+            path: '/'
+        })
 
         return res.status(201).json({ success: true, message: 'User registered successfully', })
     } catch (error) {
@@ -36,7 +42,13 @@ export const loginUser = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' })
         }
         const generatedToken = jwt.sign({ id: alreadyUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: '30d' })
-        res.cookie('token', generatedToken)
+        res.cookie('token', generatedToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+            path: '/'
+        })
         return res.status(200).json({ success: true, message: 'Login successful', })
     } catch (error) {
         console.log(error)
