@@ -79,7 +79,7 @@ const Balance = () => {
             {/* Accounts List */}
             <div className='mt-4'>
               {userAccounts.map((account, index) => (
-                <div className='flex justify-between bg-white rounded px-4 mt-2'
+                <div className='md:flex-row flex flex-col items-center justify-between bg-white rounded px-4 mt-2'
                   key={account._id}>
                   {/* Left Side */}
                   <div className='flex justify-between gap-5 px-4 py-2'>
@@ -116,7 +116,7 @@ const Balance = () => {
                     </div>
                   </div>
                   {/* Right Side */}
-                  <div className='flex items-center justify-center'>
+                  <div className='flex items-center p-4 justify-center'>
                     {/* Loading */}
                     {checkingAccountId === account._id ? (
                       <div className='flex items-center gap-2 bg-blue-100 text-blue-500 p-2 rounded'>

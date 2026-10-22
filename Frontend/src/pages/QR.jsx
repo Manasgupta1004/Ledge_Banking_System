@@ -73,15 +73,14 @@ const QR = () => {
           <div className='mt-4'>
             {userAccounts.map((account, index) => (
               <div
-                className='flex justify-between bg-white rounded px-4 mt-2'
+                className='md:flex-row flex flex-col items-center justify-between bg-white rounded md:px-4 md:py-4 md:py-0 mt-2'
                 key={account._id}
               >
-                <div className='flex justify-between gap-5 px-4 py-2'>
-                  <div className='flex items-center gap-5 mt-4'>
-                    <div className={`p-2 rounded-full ${colors[index % colors.length]}`}>
+                <div className='flex md:justify-between items-center justify-center gap-5 px-2 md:px-4 py-2 md:py-2'>
+                  <div className='md:flex-row items-center gap-5 mt-4'>
+                    <div className={`p-2 rounded-full w-10 h-10 flex items-center justify-center ${colors[index % colors.length]}`}>
                       <Landmark className='text-white' size={20} />
                     </div>
-
                     <div>
                       <div className='font-semibold'>{user?.name}</div>
 
@@ -101,7 +100,7 @@ const QR = () => {
                     </div>
                   </div>
                 </div>
-
+                < div className='flex items-center justify-center gap-2 md:gap-4 md:py-0 py-4 mt-2 md:mt-0'>
                 {generatingAccounts[account._id] ? (
                   <div className='flex items-center'>
                     <div className='flex items-center gap-2 bg-blue-100 text-blue-500 rounded px-4 py-2'>
@@ -118,15 +117,14 @@ const QR = () => {
                     />
                   </div>
                 ) : (
-                  <div
-                    className='flex items-center gap-2'
-                  >
-                    <div onClick={() => GenarateQR(account._id)} className='flex items-center gap-2 bg-blue-100 py-2 text-blue-500 px-4 rounded cursor-pointer hover:bg-blue-200'>
+                  <div className='flex items-center gap-2'>
+                    <div onClick={() => GenarateQR(account._id)} className='flex items-center gap-2 mt-4 md:mt-0 bg-blue-100 py-2 text-blue-500 px-4 rounded cursor-pointer hover:bg-blue-200'>
                       <QrCodeIcon size={20} />
                       <p>Generate QR</p>
                     </div>
                   </div>
                 )}
+                </div>
               </div>
             ))}
           </div>
